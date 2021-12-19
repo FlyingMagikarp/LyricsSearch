@@ -1,0 +1,7 @@
+docker run -d -v "$PWD/solrdata:/var/solr" -p 8983:8983 --name mll_solr solr:8.9.0 solr-precreate mll
+
+
+
+docker build -t mll_solr .
+docker run -p 8983:8983 --name mll_solr mll_solr
+docker rm -f mll_solr

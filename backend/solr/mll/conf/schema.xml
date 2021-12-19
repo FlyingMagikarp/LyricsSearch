@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema name="default-config" version="1.6">
+    <unqiueKey>id</unqiueKey>
+    <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+    <fieldType name="string" class="solr.TextField">
+        <analyzer type="index">
+            <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+        <analyzer type="query">
+            <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+    </fieldType>
+
+
+    <field name="_version_" type="plong" indexed="false" stored="false" />
+    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false"/>
+    <field name="lyrics" type="string" indexed="true" stored="true" required="true"/>
+    <field name="artist" type="string" indexed="true" stored="true"/>
+    <field name="song" type="string" indexed="true" stored="true"/>
+    <field name="genre" type="string" indexed="true" stored="true"/>
+    <field name="language" type="string" indexed="true" stored="true"/>
+</schema>
