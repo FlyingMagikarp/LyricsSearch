@@ -2,6 +2,7 @@ package ch.ffhs.search.api;
 
 import ch.ffhs.search.SearchService;
 import ch.ffhs.search.model.Song;
+import ch.ffhs.search.model.SongDto;
 import ch.ffhs.search.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -50,13 +53,36 @@ public class SearchApi {
 
     // New code here, above is for reference since it worked once
     @GetMapping(path="/search")
-    public @ResponseBody Page<Song> search(@RequestParam String searchTerm,
-                                           @RequestParam String artistTerm,
-                                           @RequestParam boolean artistIsAnd,
-                                           @RequestParam String genreTerm,
-                                           @RequestParam boolean genreIsAnd){
+    public @ResponseBody
+    ArrayList<SongDto> search(@RequestParam String searchTerm,
+                              @RequestParam String artistTerm,
+                              @RequestParam boolean artistIsAnd,
+                              @RequestParam String genreTerm,
+                              @RequestParam boolean genreIsAnd){
         Page<Song> result = searchService.search(searchTerm, artistTerm, artistIsAnd, genreTerm, genreIsAnd);
-        System.out.print("Breakpoint print");
-        return result;
+        List<Song> resultList = result.getContent();
+        ArrayList<SongDto> dtoList = new ArrayList<>();
+        for (Song s : resultList){
+            dtoList.add(s.getDto());
+        }
+
+        return dtoList;
+    }
+
+    @GetMapping(path="/genres")
+    public @ResponseBody ArrayList<String> getGenre(){
+        ArrayList<String> genreList = new ArrayList<>();
+        genreList.add("Rock");
+        genreList.add("Metal");
+        genreList.add("Pop");
+        genreList.add("Indie");
+        genreList.add("R&B");
+        genreList.add("Folk");
+        genreList.add("Electronic");
+        genreList.add("Jazz");
+        genreList.add("Hip-Hop");
+        genreList.add("Country");
+
+        return genreList;
     }
 }

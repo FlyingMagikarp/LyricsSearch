@@ -13,7 +13,9 @@ public class SearchService {
     private SongRepository songRepository;
 
     public Page<Song> search(String searchTerm, String artistTerm, boolean artistIsAnd, String genreTerm, boolean genreIsAnd){
-        if(searchTerm.equals("")){
+        genreTerm = genreTerm.equals("Any") ? "" : genreTerm;
+
+        if(searchTerm.equals("") && genreTerm.equals("") & artistTerm.equals("")){
             return songRepository.findAll(PageRequest.of(0, 10));
         } else if (artistIsAnd && genreIsAnd){
             return songRepository.findSongByLyricsAndArtistAndGenre(searchTerm, artistTerm, genreTerm, PageRequest.of(0, 10));

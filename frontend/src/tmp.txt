@@ -1,0 +1,33 @@
+{songs.map((m, i) => {
+    return (
+        <Grid item key={i}>
+            <Grid container direction={"row"} spacing={1}>
+                <Grid item>
+                    <Typography id="modal-modal-description" variant="body1" className={classes.modalDescription}>
+                        {i}
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography id="modal-modal-description" variant="body1" className={classes.modalDescription}>
+                        {m.artist}
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography id="modal-modal-description" variant="body1" className={classes.modalDescription}>
+                        {m.song}
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography id="modal-modal-description" variant="body1" className={classes.modalDescription}>
+                        {m.genre}
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography id="modal-modal-description" variant="body1" className={classes.modalDescription} onClick={() => {handleOpen(m)}}>
+                        {"View Lyrics"}
+                    </Typography>
+                </Grid>
+            </Grid>
+        </Grid>
+        );
+    })}

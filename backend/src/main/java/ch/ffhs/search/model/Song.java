@@ -25,4 +25,16 @@ public class Song {
 
     @Indexed(name = "language", type = "string")
     private String language;
+
+    public SongDto getDto(){
+        SongDto dto = new SongDto();
+        dto.id = this.id;
+        dto.artist = this.artist;
+        dto.song = this.song;
+        dto.lyrics = this.lyrics;
+        dto.genre = this.genre;
+        dto.language = this.language;
+
+        return dto;
+    }
 }
