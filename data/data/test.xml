@@ -1,10 +1,10 @@
 <add>
     <doc>
-        <field name="artist">aafi</field>
-        <field name="song">miss murderé</field>
+        <field name="artist">test</field>
+        <field name="song">test</field>
         <field name="genre">Pop</field>
         <field name="language">es</field>
-        <field name="lyrics">Test Lyrics UTF TEST</field>
+        <field name="lyrics">Test Lyrics</field>
     </doc>
 
 </add>

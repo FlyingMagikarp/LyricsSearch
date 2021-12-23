@@ -3,15 +3,29 @@ import os
 
 
 def convert_row_to_csv(row):
+    if row.Language == 'en':
+        return """
+        <doc>
+            <field name="artist">%s</field>
+            <field name="song">%s</field>
+            <field name="genre">%s</field>
+            <field name="language">%s</field>
+            <field name="lyrics_en">%s</field>
+            <field name="lyrics_es">%s</field>
+        </doc>
+        """ % (row.Artist, row.Song, row.Genre, row.Language, row.Lyrics, '')
+
     return """
-    <doc>
-        <field name="artist">%s</field>
-        <field name="song">%s</field>
-        <field name="genre">%s</field>
-        <field name="language">%s</field>
-        <field name="lyrics">%s</field>
-    </doc>
-    """ % (row.Artist, row.Song, row.Genre, row.Language, row.Lyrics)
+        <doc>
+            <field name="artist">%s</field>
+            <field name="song">%s</field>
+            <field name="genre">%s</field>
+            <field name="language">%s</field>
+            <field name="lyrics_en">%s</field>
+            <field name="lyrics_es">%s</field>
+        </doc>
+        """ % (row.Artist, row.Song, row.Genre, row.Language, '', row.Lyrics)
+
 
 
 OUTPUT_PATH = '/data/out.xml'
