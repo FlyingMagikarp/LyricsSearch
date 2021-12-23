@@ -105,7 +105,8 @@ const Main = observer(() => {
         dataStore.updateArtistTerm(newTerm);
     };
 
-    const handleSearch = async () => {
+    const handleSearch = async (e) => {
+        e.preventDefault();
         setIsLoading(true);
         setSongs(await dataStore.performSearch());
         setIsLoading(false);
@@ -128,20 +129,21 @@ const Main = observer(() => {
                 </Typography>
                 <Grid container direction={"column"} spacing={1}>
                     <Grid item>
-                        <Paper component="form" className={classes.searchPaper}>
+                        <Paper component="form" className={classes.searchPaper} onSubmit={e => handleSearch(e)}>
                             <InputBase
                                 placeholder="Search Lyrics"
-                                inputProps={{ 'aria-label': 'search google maps' }}
+                                inputProps={{ 'aria-label': 'search lyrics' }}
                                 className={classes.searchInputBase}
                                 onChange={(event) => {handleSearchTermChange(event.target.value)}}
+                                onSubmit={e => { e.preventDefault(); handleSearch(e)}}
                             />
-                            <IconButton aria-label="search" onClick={handleSearch} className={classes.searchIconButton}>
+                            <IconButton aria-label="search" onClick={e => handleSearch(e)} className={classes.searchIconButton}>
                                 <SearchIcon/>
                             </IconButton>
                         </Paper>
                     </Grid>
                     <Grid item>
-                        <Paper component="form" className={classes.searchPaper}>
+                        <Paper component="form" className={classes.searchPaper} onSubmit={e => handleSearch(e)}>
                             <Button variant={"outlined"} aria-label="artist" className={classes.searchIconButton}
                             onClick={() => {dataStore.toggleArtistIsAnd(); setArtistIsAnd(!artistIsAnd)}}>
                                 {artistIsAnd ? "AND" : "NOT"}
@@ -151,11 +153,12 @@ const Main = observer(() => {
                                 inputProps={{ 'aria-label': 'search google maps' }}
                                 className={classes.searchInputBase}
                                 onChange={(event) => {handleArtistTermChange(event.target.value)}}
+                                onSubmit={e => { e.preventDefault(); handleSearch(e)}}
                             />
                         </Paper>
                     </Grid>
                     <Grid item>
-                        <Paper component="form" className={classes.searchPaperSmaller}>
+                        <Paper component="form" className={classes.searchPaperSmaller} onSubmit={e => handleSearch(e)}>
                             <Button variant={"outlined"} aria-label="genre" className={classes.searchIconButton}
                             onClick={() => {dataStore.toggleGenreIsAnd(); setGenreIsAnd(!genreIsAnd)}}>
                                 {genreIsAnd ? "AND" : "NOT"}
@@ -180,7 +183,7 @@ const Main = observer(() => {
                         </Paper>
                     </Grid>
                     <Grid item>
-                        <Button variant={"contained"} onClick={handleSearch}>SEARCH</Button>
+                        <Button variant={"contained"} onClick={e => handleSearch(e)}>SEARCH</Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -241,7 +244,7 @@ const Main = observer(() => {
                                 <Typography id="modal-modal-title" variant="h4" component="h2">
                                     {currentSong.artist} - {currentSong.song}
                                 </Typography>
-                                <Typography id="modal-modal-description" variant="body1" className={classes.modalDescription}>
+                                <Typography id="modal-modal-description" variant="body1" className={classes.modalDescription} style={{whiteSpace: "pre-line"}}>
                                     {currentSong.lyrics}
                                 </Typography>
                             </Box>

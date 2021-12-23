@@ -4,7 +4,8 @@
         <field name="song">test</field>
         <field name="genre">Pop</field>
         <field name="language">es</field>
-        <field name="lyrics">Test Lyrics</field>
+        <field name="lyrics">Test Lyrics
+        testline
+        testlin2</field>
     </doc>
-
 </add>

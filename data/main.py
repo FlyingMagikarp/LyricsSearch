@@ -278,6 +278,7 @@ split_final_df = np.array_split(final_df, 10)
 for i, d in enumerate(split_final_df):
     tmp = ('\n'.join(d.apply(convert_row_to_xml, axis=1)))
     # fix some janky symbols
+    tmp = tmp.replace('\n', ' \n')
     tmp = tmp.replace('&', 'and')
     tmp = tmp.replace(' < ', ' ')
     tmp = tmp.replace('<br />', '\n')
