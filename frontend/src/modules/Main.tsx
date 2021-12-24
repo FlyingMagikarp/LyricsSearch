@@ -150,7 +150,7 @@ const Main = observer(() => {
                             </Button>
                             <InputBase
                                 placeholder="Artist"
-                                inputProps={{ 'aria-label': 'search google maps' }}
+                                inputProps={{ 'aria-label': 'search artist' }}
                                 className={classes.searchInputBase}
                                 onChange={(event) => {handleArtistTermChange(event.target.value)}}
                                 onSubmit={e => { e.preventDefault(); handleSearch(e)}}
@@ -245,7 +245,14 @@ const Main = observer(() => {
                                     {currentSong.artist} - {currentSong.song}
                                 </Typography>
                                 <Typography id="modal-modal-description" variant="body1" className={classes.modalDescription} style={{whiteSpace: "pre-line"}}>
-                                    {currentSong.lyrics}
+                                    {currentSong.lyrics.split('<br />').map(m => {
+                                        return (
+                                            <>
+                                                {m}
+                                                <br/>
+                                            </>
+                                        )
+                                    })}
                                 </Typography>
                             </Box>
                         </Modal>

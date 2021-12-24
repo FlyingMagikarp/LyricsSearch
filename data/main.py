@@ -281,9 +281,10 @@ for i, d in enumerate(split_final_df):
     tmp = tmp.replace('\n', ' \n')
     tmp = tmp.replace('&', 'and')
     tmp = tmp.replace(' < ', ' ')
-    tmp = tmp.replace('<br />', '\n')
+    tmp = tmp.replace('<br />', '&lt;br /&gt;')
+    tmp = tmp.replace('\n', '&lt;br /&gt;')
     # write to file with <add> tag
     with open(OUTPUT_PATH+'_'+str(i), 'w') as f:
         f.write("<add>" + tmp + "</add>")
 
-    print('Exported to ', OUTPUT_PATH)
+    print('Exported to ', OUTPUT_PATH+'_'+str(i))
