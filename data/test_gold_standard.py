@@ -6,7 +6,8 @@ import datetime
 def score_query(obj):
     query = obj.get('query')
 
-    request_url = URL_PREFIX + query + URL_SUFFIX
+    # request_url = URL_PREFIX + query + URL_SUFFIX
+    request_url = URL_PREFIX + query + URL_SUFFIX + RERANKING + query + ')'
 
     r = requests.get(request_url)
     content = r.json().get('response')
@@ -25,6 +26,8 @@ def score_query(obj):
 
 URL_PREFIX = 'http://localhost:8983/solr/mll/select?q.op=OR&q='
 URL_SUFFIX = '&rows=10'
+# RERANKING = '&rq={!rerank reRankQuery=$rqq reRankDocs=1000 reRankWeight=10}&rqq=(lyrics:(*?0*))'
+RERANKING = '&rq={!rerank reRankQuery=$rqq reRankDocs=1000 reRankWeight=10}&rqq=('
 
 f = open('gold_standard/gold_standard.json')
 query_list = json.load(f)
